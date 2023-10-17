@@ -1,8 +1,6 @@
 enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
 
-open class Pessoa(nome: String, email: String)
-
-class Usuario(val id: String, val nivel: Int, val senha: String): Pessoa(nome, email)
+class Usuario(val idUser: Int, val nameUser: String, val nivel: Int, val senha: String)
 
 data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
 
@@ -14,9 +12,9 @@ class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
     fun matricular(usuario: Usuario) {
         if (!estaMatriculado(usuario)) {
             matriculas.add(Matricula(usuario, this))
-            println("${usuario.nome} foi matriculado na formação $nome")
+            println("${usuario.nameUser} foi matriculado na formação $nome")
         } else {
-            println("${usuario.nome} já está matriculado na formação $nome")
+            println("${usuario.nameUser} já está matriculado na formação $nome")
         }
     }
 
@@ -24,9 +22,9 @@ class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
         val matricula = matriculas.find { it.usuario == usuario }
         if (matricula != null) {
             matriculas.remove(matricula)
-            println("${usuario.nome} foi desmatriculado da formação $nome")
+            println("${usuario.nameUser} foi desmatriculado da formação $nome")
         } else {
-            println("${usuario.nome} não está matriculado na formação $nome")
+            println("${usuario.nameUser} não está matriculado na formação $nome")
         }
     }
 
@@ -36,13 +34,13 @@ class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
 
     fun listarMatriculados() {
         println("Usuários matriculados na formação $nome:")
-        matriculas.forEach { println(it.usuario.nome) }
+        matriculas.forEach { println(it.usuario.nameUser) }
     }
 }
 
 fun main() {
-    val usuario1 = Usuario("João")
-    val usuario2 = Usuario("Maria")
+    val usuario1 = Usuario(1, "João", 2, "Jo112233")
+    val usuario2 = Usuario(2, "Maria", 10, "M@ria.123")
 
     val formacao1 = Formacao("Programação Básica", listOf(ConteudoEducacional("Introdução ao Kotlin"), ConteudoEducacional("Estruturas de Controle")))
     val formacao2 = Formacao("Programação Avançada", listOf(ConteudoEducacional("Programação Orientada a Objetos"), ConteudoEducacional("Design Patterns")))
